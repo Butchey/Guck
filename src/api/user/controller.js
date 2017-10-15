@@ -1,11 +1,6 @@
 'use strict'
 
-const Datastore = require('nedb');
-const Bcrypt = require('bcrypt');
-
-
-var db = new Datastore({ filename: 'db/users.db', autoload: true });
-
+import User from './model';
 
 function get(req, res) {
 }
@@ -14,27 +9,38 @@ function update(req, res) {
 }
 
 function create(req, res, next) {
-    req.query.password = Bcrypt.hashSync(req.query.password, Bcrypt.genSaltSync(10));
-    // Add Validation by Schema
-    db.insert( req.query, ( err, doc ) => {
-        res.json(doc);
-    });
+    console.log(req.body);
+    let user = new User(req.body);
+    user.save(( err, dbres ) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(dbres);
+        }
+      });
 }
 
 function list(req, res) {
-    db.find(req.query, ( err, docs ) => {
-        console.log(docs);
-        res.json(docs);
-    });
+    User.find((err, dbres) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(dbres);
+        }
+      });
 }
 
 function remove(req, res, next) {
-    db.remove(req.query, { multi: true }, ( err, numRemoved ) => {
-        res.json(numRemoved);
-    });
+    User.remove( req.body, (err, dbres) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(dbres);
+        }
+      });
 }
 
 function login(req, res) {
 }
 
-export default {get, update, create, list, remove, login};
+export default { get, update, create, list, remove, login };
