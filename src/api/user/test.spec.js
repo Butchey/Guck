@@ -3,6 +3,7 @@ import chaiHttp from 'chai-http';
 
 import server from '../../index'
 import UserController from './controller';
+import User from './model';
 
 let should = chai.should();
 
@@ -10,13 +11,9 @@ chai.use(chaiHttp);
 //Our parent block
 describe('User', () => {
     beforeEach((done) => { //Before each test we empty the database
-      chai.request(server)
-      .delete('/api/user')
-      .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('number');
-        done();
-      });
+        User.remove( {},function (err) {
+          done();
+        });
     });
 /*
   * Test the /GET route
@@ -33,5 +30,24 @@ describe('User', () => {
             });
       });
   });
+
+  describe('/POST User', () => {
+    it('it should Create a User', (done) => {
+      let req = {
+        username: 'johndoe',
+        password: 'test123',
+        email: 'test@johndoe.com'
+      };
+      chai.request(server)
+          .post('/api/user')
+          .send(req)
+          .end((err, res) => {
+            console.log(res.body);
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+            done();
+          });
+    });
+});
 
 });
