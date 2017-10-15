@@ -1,7 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 import routes from './api/routes'
+
+mongoose.connect('mongodb://localhost/guck-server');
 
 const app = express();
 
