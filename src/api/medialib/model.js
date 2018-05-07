@@ -17,4 +17,4 @@ var medialibSchema = new Schema({
 var Medialib = mongoose.model('Medialib', medialibSchema);
 
 
-module.exports = Medialib;
+export default Medialib;
