@@ -1,8 +1,8 @@
 const config = {}
 
 config.db = {
-  folder: 'db',
+  host: 'localhost',
   secret: process.env.REDIS_STORE_SECRET
 }
 
-module.exports = config
+export default config;
