@@ -1,11 +1,7 @@
-const config = {}
+import db from './db';
+import server from './server';
+import tmdb from './tmdb';
 
-config.db = {
-  host: 'localhost',
-  db: '',
-  user: '',
-  password: '',
-  port: 27017
-}
+const config = { db, server, tmdb };
 
 export default config;

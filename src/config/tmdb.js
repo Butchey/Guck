@@ -1,3 +1,5 @@
-'use strict'
+const tmdb = {
+  apikey: 'localhost',
+};
 
-var apiKey = '';
+export default tmdb;
