@@ -1,53 +1,49 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import server from '../../index'
+import server from '../../index';
 import UserController from './controller';
 import User from './model';
 
-let should = chai.should();
+const should = chai.should();
 
 chai.use(chaiHttp);
-//Our parent block
 describe('User', () => {
-    beforeEach((done) => { //Before each test we empty the database
-        User.remove( {},function (err) {
+  beforeEach((done) => { // Empty database before each Test
+    User.remove({}, (err) => {
+      done();
+    });
+  });
+
+  describe('/GET User', () => {
+    it('it should GET all the Users', (done) => {
+      chai.request(server)
+        .get('/api/user')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(0);
           done();
         });
     });
-/*
-  * Test the /GET route
-  */
-  describe('/GET User', () => {
-      it('it should GET all the Users', (done) => {
-        chai.request(server)
-            .get('/api/user')
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(0);
-              done();
-            });
-      });
   });
 
   describe('/POST User', () => {
     it('it should Create a User', (done) => {
-      let req = {
+      const req = {
         username: 'johndoe',
         password: 'test123',
-        email: 'test@johndoe.com'
+        email: 'test@johndoe.com',
       };
       chai.request(server)
-          .post('/api/user')
-          .send(req)
-          .end((err, res) => {
-            console.log(res.body);
-              res.should.have.status(200);
-              res.body.should.be.a('object');
-            done();
-          });
+        .post('/api/user')
+        .send(req)
+        .end((err, res) => {
+          console.log(res.body);
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
     });
-});
-
+  });
 });
