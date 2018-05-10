@@ -2,28 +2,27 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config';
-
 import routes from './api/routes';
 
-mongoose.connect('mongodb://localhost/guck-server');
+mongoose.Promise = global.Promise;
+
+mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`, { useMongoClient: true });
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true,
 }));
 
 app.use('/api', routes);
 
-app.listen(8080, function (err) {
-    if (err) {
-      throw err
-    }
-  
-    console.log(`server is listening on ${'8888'}...`)
-  })
+app.listen(config.server.port, (err) => {
+  if (err) {
+    throw err;
+  }
+  console.log(`server is listening on ${config.server.port}...`);
+});
 
 export default app;
-
 
