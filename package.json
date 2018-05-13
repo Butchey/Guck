@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel-node --presets babel-preset-env src/index.js",
     "test": "npm run test-unit",
-    "test-unit": "NODE_ENV=test mocha --recursive 'src/**/*.spec.js' --require babel-core/register"
+    "test-unit": "NODE_ENV=test mocha --recursive 'src/**/*.spec.js' --require babel-core/register",
+    "build": "babel src -d build --ignore '**/test.spec.js'"
   },
   "author": "Philipp Fleischer",
   "license": "ISC",
@@ -21,9 +22,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "mocha": "^4.0.1",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
