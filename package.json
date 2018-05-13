@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node --presets babel-preset-env src/index.js",
     "test": "npm run test-unit",
-    "test-unit": "NODE_ENV=test nyc mocha --recursive 'src/**/*.spec.js' --require babel-core/register --exit",
+    "test-unit": "NODE_ENV=test nyc --reporter=lcov mocha --recursive 'src/**/*.spec.js' --require babel-core/register --exit",
     "build": "babel src -d build --ignore '**/test.spec.js'"
   },
   "author": "Philipp Fleischer",
