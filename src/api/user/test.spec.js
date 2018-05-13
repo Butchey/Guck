@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import server from '../../index';
-import UserController from './controller';
 import User from './model';
 
 const should = chai.should();
