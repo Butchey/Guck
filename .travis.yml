@@ -1,9 +1,18 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=f80f457ead89ff92c71186825fb9989cd2eccb9e4bb1ffaf632dc30294f1b94a
 language: node_js
 node_js:
   - "10"
   - "9"
 install:
   - npm install
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 services: mongodb
