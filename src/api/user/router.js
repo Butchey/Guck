@@ -2,23 +2,24 @@ import express from 'express';
 import UserController from './controller';
 
 const router = express.Router();
+const controller = new UserController();
 
 router.route('/')
 /* GET /api/users - Get list of users */
-  .get(UserController.list)
+  .get((...args) => controller.list(...args))
 
 /* POST /api/users - Create new user */
-  .post(UserController.create)
+  .post((...args) => controller.create(...args))
 
 /* DELETE /api/user/:userId - Delete user */
-  .delete(UserController.remove);
+  .delete((...args) => controller.delete(...args));
 
-router.route('/:_id')
+router.route('/:id')
 /* GET /api/user/:userId - Get user */
-  .get(UserController.get)
+  .get((...args) => controller.read(...args))
 
 /* PUT /api/user/:userId - Update user */
-  .put(UserController.update);
+  .put((...args) => controller.update(...args));
 
 /* Load user when API with userId route parameter is hit */
 /* router.param('userId', UserController.get); */
