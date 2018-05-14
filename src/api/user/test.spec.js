@@ -28,7 +28,24 @@ describe('User', () => {
   });
 
   describe('/POST User', () => {
-    it('it should Create a User', (done) => {
+    it('it should not POST a user without username field', (done) => {
+      const req = {
+        password: 'test123',
+        email: 'test@johndoe.com',
+      };
+      chai.request(server)
+        .post('/api/user')
+        .send(req)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('errors');
+          res.body.errors.username.should.have.property('message');
+          res.body.errors.username.should.have.property('kind').eql('required');
+          done();
+        });
+    });
+    it('it should POST a User', (done) => {
       const req = {
         username: 'johndoe',
         password: 'test123',
@@ -38,7 +55,6 @@ describe('User', () => {
         .post('/api/user')
         .send(req)
         .end((err, res) => {
-          console.log(res.body);
           res.should.have.status(200);
           res.body.should.be.a('object');
           done();
