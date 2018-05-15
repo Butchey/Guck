@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 
-const medialibSchema = new Schema(
+const librarySchema = new Schema(
   {
     name: { type: String, required: true },
     module: { type: String, required: true },
-    content: { type: Schema.Types.Mixed, unique: true },
+    content: [{
+      item: { type: Schema.Types.ObjectId, refPath: 'module' },
+    }],
     locations: { type: Array, required: true },
     agent: { type: String },
     scanner: { type: String },
@@ -17,7 +19,7 @@ const medialibSchema = new Schema(
   },
 );
 
-const Medialib = mongoose.model('Medialib', medialibSchema);
+const Library = mongoose.model('Medialib', librarySchema);
 
 
-export default Medialib;
+export default Library;
