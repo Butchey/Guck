@@ -7,6 +7,7 @@ const movieSchema = new Schema(
   {
     filename: { type: String, required: true },
     path: { type: String, required: true, unique: true },
+    library: { type: Schema.Types.ObjectId, ref: 'Library' },
     cover: { type: String },
     meta: {
       title: { type: String },
