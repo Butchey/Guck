@@ -1,10 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-
 import server from '../../index';
 import User from './model';
-
-const should = chai.should();
 
 chai.use(chaiHttp);
 describe('User', () => {
