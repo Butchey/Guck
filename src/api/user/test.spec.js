@@ -3,6 +3,8 @@ import chaiHttp from 'chai-http';
 import server from '../../index';
 import User from './model';
 
+chai.should();
+
 chai.use(chaiHttp);
 describe('User', () => {
   beforeEach((done) => { // Empty database before each Test
