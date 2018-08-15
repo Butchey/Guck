@@ -55,4 +55,5 @@ build
 #Plugin Folder
 src/plugins/*
 !src/plugins/plugins.json
+!src/plugins/butchey/example-plugin
 
