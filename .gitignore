@@ -53,5 +53,6 @@ build
 .DS_Store
 
 #Plugin Folder
-src/plugins
+src/plugins/*
+!src/plugins/plugins.json
 

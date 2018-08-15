@@ -1,0 +1,7 @@
+[
+  {
+    "name": "butchey/example-plugin",
+    "git": "https://github.com/abcnews/census-100-people",
+    "active": true
+  }
+]
