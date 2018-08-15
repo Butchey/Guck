@@ -3,6 +3,8 @@ import chaiHttp from 'chai-http';
 import server from '../../index';
 import Medialib from './model';
 
+chai.should();
+
 chai.use(chaiHttp);
 describe('Library', () => {
   beforeEach((done) => { // Empty database before each Test
@@ -37,8 +39,8 @@ describe('Library', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('errors');
-          res.body.errors.username.should.have.property('message');
-          res.body.errors.username.should.have.property('kind').eql('required');
+          res.body.errors.module.should.have.property('message');
+          res.body.errors.module.should.have.property('kind').eql('required');
           done();
         });
     });
@@ -54,7 +56,6 @@ describe('Library', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          console.log(res.body);
           done();
         });
     });
