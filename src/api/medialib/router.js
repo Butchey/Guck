@@ -1,8 +1,8 @@
 import express from 'express';
-import MedialibController from './controller';
+import LibraryController from './controller';
 
 const router = express.Router();
-const controller = new MedialibController();
+const controller = new LibraryController();
 
 router.route('/')
 /* GET /api/library - Get list of Media Libraries */
@@ -11,17 +11,17 @@ router.route('/')
 /* POST /api/library - Create new Media Library */
   .post((...args) => controller.create(...args))
 
-/** DELETE /api/library/:libName- Delete Media Library */
+/** DELETE /api/library/:libName - Delete Media Library */
   .delete((...args) => controller.delete(...args));
 
-router.route('/:_name')
-/* GET /api/library/:libName - Get Media Library */
-  .get((...args) => controller.read(...args))
+router.route('/:libName')
+/* GET /api/library/:libraryName - Get Media Library */
+  .get((...args) => controller.list(...args))
 
 /* PUT /api/library/:libName - Update Media Library */
-  .put((...args) => controller.update(...args));
+  .put((...args) => controller.update(...args))
 
-/* Load medialib when API with libId route parameter is hit */
-// router.param('libId', MedialibController.get);
+/* POST /api/library/:libName - Create new Media Library Item */
+  .post((...args) => controller.create(...args));
 
 export default router;
